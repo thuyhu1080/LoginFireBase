@@ -1,14 +1,21 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, ScrollView, View } from 'react-native';
 import CategoryListItem from './components/CategoryListItem';
 
 export default class App extends React.Component {
   render() {
     return (
-      <View style={styles.container}>
-          <CategoryListItem props />
+      <View>
+          <ScrollView style={{ paddingLeft: 16, paddingRight: 16}} contentContainerStyle={{backgroundColor: '#F00'}}>
           <CategoryListItem />
           <CategoryListItem />
+          <CategoryListItem />
+          <CategoryListItem />
+          <CategoryListItem />
+          <CategoryListItem />
+          <CategoryListItem />
+          <CategoryListItem />
+          </ScrollView>
       </View>
     );
   }
