@@ -1,39 +1,43 @@
-import React from 'react';
-import { StyleSheet, Text, ScrollView, View, FlatList } from 'react-native';
-import CategoryListItem from './components/CategoryListItem';
+import { createAppContainer, createSwitchNavigator } from "react-navigation";
+import { creatStackNavigator, createStackNavigator } from "react-navigation-stack";
+import LoadingScreen from "./screens/LoadingScreen";
+import LoginScreen from "./screens/LoginScreen";
+import RegisterScreen from "./screens/RegisterScreen";
+import HomeScreen from "./screens/HomeScreen";
 
-export default class App extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      categories: [
-        { id: 1,name: 'Dụng cụ trượt tuyết'},
-        { id: 2,name: 'Quần áo trượt tuyết'},
-        { id: 3,name: 'Kính mũ'}
-      ]
-    };
-  }       
+import * as firebase from "firebase";
 
-  render() {
-    const { categories } = this.state;
-    return (
-        <FlatList data={categories} 
-          renderItem={({ item }) => <CategoryListItem  category={item} />}
-          keyExtractor={item => `${item.id}`}
-          contentContainerStyle={{ paddingLeft: 16, paddingRight: 16 }} 
-        />
-    );  
-  }
-}
+var firebaseConfig = {
+  apiKey: "AIzaSyBP7hcksE1-V7nF2zybdkv64IWgURhbj0Y",
+  authDomain: "manage-de1b2.firebaseapp.com",
+  databaseURL: "https://manage-de1b2.firebaseio.com",
+  projectId: "manage-de1b2",
+  storageBucket: "manage-de1b2.appspot.com",
+  messagingSenderId: "938754490049",
+  appId: "1:938754490049:web:1eca657257e830a2e35e40",
+  measurementId: "G-5YGVYV9QMM"
+};
+// Initialize Firebase
+firebase.initializeApp(firebaseConfig);
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'stretch',
-    justifyContent: 'center',
-    paddingLeft: 16,
-    paddingRight: 16
-  }
+const AppStack = createStackNavigator({
+    Home: HomeScreen
 });
-     
+
+const AuthStack = createStackNavigator({
+    Login: LoginScreen,
+    Register: RegisterScreen
+});
+
+export default createAppContainer(
+    createSwitchNavigator(
+        {
+            Loading: LoadingScreen,
+            App: AppStack,
+            Auth: AuthStack
+        },
+        {
+            initialRouteName: "Loading"
+        }
+    )
+);
