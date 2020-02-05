@@ -21,10 +21,11 @@ export default class HomeScreen extends React.Component {
         return (
             <View style={styles.container}>
                 <Text>Hi {this.state.email}!</Text>
-
-                <TouchableOpacity style={{ marginTop: 32 }} onPress={this.signOutUser}>
-                    <Text>Logout</Text>
-                </TouchableOpacity>
+                <View style={styles.logout}>
+                    <TouchableOpacity style={{ marginTop: 32 }} onPress={this.signOutUser}>
+                        <Text>Logout</Text>
+                    </TouchableOpacity>
+                </View>
             </View>
         );
     }
@@ -35,5 +36,12 @@ const styles = StyleSheet.create({
         flex: 1,
         alignItems: "center",
         justifyContent: "center"
+    },
+
+    logout: {
+        marginTop: 200,
+        backgroundColor: 'red'
     }
+
+
 });
